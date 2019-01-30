@@ -1,0 +1,14 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/waynewu/2.Online_Course/6.Online_Cpp/DSA/graph/dijkstra.cpp
+iostream
+-
+iomanip
+-
+
