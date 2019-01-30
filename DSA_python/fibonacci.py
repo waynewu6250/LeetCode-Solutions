@@ -20,7 +20,7 @@ def func1(n):
     print("Solution 1 is: ",fib(n))
 
 
-# Dynamic programming solution + decorator
+# Dynamic programming: top-down (decorator)
 @timing
 def func2(n):
     def store(func):
@@ -38,7 +38,7 @@ def func2(n):
         return func(n-1)+func(n-2)
     print("Solution 2 is: ",func(n))
 
-# Iteration
+# Dynamic programming: bottom-up (iteration)
 @timing
 def func3(n):
     def fib2(n):
