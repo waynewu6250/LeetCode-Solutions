@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/Users/waynewu/2.Online_Course/6.Online_Cpp/DSA/graph/dijkstra.cpp" "/Users/waynewu/2.Online_Course/6.Online_Cpp/DSA/cmake-build-debug/CMakeFiles/DSA.dir/graph/dijkstra.cpp.o"
+  "/Users/waynewu/4.Github/LeetCode-Solutions/DSA_cpp/graph/dijkstra.cpp" "/Users/waynewu/4.Github/LeetCode-Solutions/DSA_cpp/cmake-build-debug/CMakeFiles/DSA.dir/graph/dijkstra.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "AppleClang")
 
