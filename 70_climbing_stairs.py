@@ -14,7 +14,7 @@ class Solution(object):
         
         @memo
         def climb(nn):
-            nn = nn[0]
+            nn = nn[0] #nn=(n,), get the first one
             if nn <= 2:
                 return nn
             return climb(nn-1)+climb(nn-2)
