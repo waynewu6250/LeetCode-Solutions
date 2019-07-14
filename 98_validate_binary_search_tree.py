@@ -5,7 +5,8 @@ class TreeNode:
         self.left = None
         self.right = None
 
-class Solution:
+# 1. recursive
+class Solution1:
     def isValidBST(self, root: TreeNode) -> bool:
         return self.checkBST(root, None, None)
     
@@ -20,3 +21,32 @@ class Solution:
             return False
         
         return True
+
+# 2. iterative
+class Solution2:
+    def isValidBST(self, root: TreeNode) -> bool:
+        answer = []
+        stack = []
+        prev = None
+        if root == None:
+	        return answer
+	        
+        while root != None or stack:
+	            
+            #1. Push all left node to stack
+            while root:
+                stack.append(root)
+                root = root.left
+            
+            #2. get root from stack
+            root = stack.pop(-1)
+            
+            #3. check prev and root
+            if prev != None and prev.val >= root.val: return False
+            prev = root
+            #3. move to right node
+            root = root.right
+	    
+        return answer
+
+        
