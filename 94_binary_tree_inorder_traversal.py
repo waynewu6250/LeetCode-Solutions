@@ -41,4 +41,3 @@ class Solution:
             root = root.right
         
         return answer
-    
