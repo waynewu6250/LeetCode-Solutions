@@ -4,6 +4,7 @@ class Solution(object):
         :type n: int
         :rtype: int
         """
+        # Method 1: top-down
         def memo(func):
             cache = {}
             def wraps(*args):
@@ -20,3 +21,11 @@ class Solution(object):
             return climb(nn-1)+climb(nn-2)
         
         return climb(n)
+        
+        # Method 2: bottom-up
+        dp = [1]*(n+1)
+        for i in range(2,n+1):
+            dp[i] = dp[i-1] + dp[i-2]
+        return dp[n]
+        
+        
