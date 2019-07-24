@@ -9,7 +9,7 @@ class Solution(object):
             cache = {}
             def wraps(*args):
                 if args not in cache:
-                    cache[args] = func(args)
+                    cache[args] = func(*args)
                 return cache[args]
             return wraps
         
@@ -28,4 +28,10 @@ class Solution(object):
             dp[i] = dp[i-1] + dp[i-2]
         return dp[n]
         
+        # Method 3: bottom-up optimization
+        dp1, dp2 = 1, 1
+        for i in range(2, n+1):
+            dp2, dp1, = dp1+dp2, dp2
+        return dp2
+
         
