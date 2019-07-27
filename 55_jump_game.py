@@ -64,6 +64,7 @@ class Solution:
         # time complexity: O(n)
         # space complexity: O(1)
         def greedy_search(nums):
+            # 1) back to front
             final = len(nums)-1
             leftmost = final
             for i in range(final-1,-1,-1):
@@ -71,6 +72,18 @@ class Solution:
                 if i+nums[i] >= leftmost:
                     leftmost = i
             return leftmost == 0
+
+            # 2) front to back
+            v = nums[0]
+            for i in range(1,len(nums)):
+                v -= 1
+                if v < 0:
+                    return False
+                if v < nums[i]:
+                    v = nums[i]
+            return True
+
+
         
             # max_ix = 0 
             # for i,item in enumerate(nums):
