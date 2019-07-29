@@ -10,12 +10,12 @@ class Solution:
                  '8': ['t', 'u', 'v'],
                  '9': ['w', 'x', 'y', 'z']}
             
-        output = []
+        answer = []
         items = ""
-        def backtrack(items, next_digits):
+        def backtrack(next_digits, items):
 
             if len(next_digits) == 0:
-                output.append(items)
+                answer.append(items)
                 return
           
             for letter in phone[next_digits[0]]:
@@ -23,5 +23,5 @@ class Solution:
                     
         
         if digits:
-            backtrack(items, digits)
-        return output
+            backtrack(digits, items)
+        return answer
