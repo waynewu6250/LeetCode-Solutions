@@ -1,16 +1,18 @@
-class Solution(object):
-    def numIslands(self, grid):
-        """
-        :type grid: List[List[str]]
-        :rtype: int
-        """
+#
+# @lc app=leetcode id=200 lang=python3
+#
+# [200] Number of Islands
+#
+class Solution:
+    def numIslands(self, grid: List[List[str]]) -> int:
+
         m = len(grid)
         if m == 0: return 0
         n = len(grid[0])
         
         ans = 0
-        for y in xrange(m):
-            for x in xrange(n):
+        for y in range(m):
+            for x in range(n):
                 if grid[y][x] == '1':
                     ans += 1
                     self.__dfs(grid, x, y, n, m)
@@ -24,3 +26,5 @@ class Solution(object):
         self.__dfs(grid, x - 1, y, n, m)
         self.__dfs(grid, x, y + 1, n, m)
         self.__dfs(grid, x, y - 1, n, m)
+        
+
