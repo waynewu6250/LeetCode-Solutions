@@ -6,23 +6,17 @@ class Solution(object):
         :rtype: List[List[int]]
         """
         answer = []
-        combination = []
+        items = []
         
-        def search(candidates, start, target):
-            # 2. constraint
+        def backtrack(items, start, target):
             if target == 0:
-                # 3. goal
-                answer.append(combination[:])
+                answer.append(items)
                 return
-            
             if target < 0:
                 return
             
-            # 1. choice
             for i in range(start, len(candidates)):
-                combination.append(candidates[i])
-                search(candidates, i, target-candidates[i])
-                combination.pop()
+                backtrack(items+[candidates[i]], i, target-candidates[i])
         
-        search(candidates, 0, target)
+        backtrack(items, 0, target)
         return answer
