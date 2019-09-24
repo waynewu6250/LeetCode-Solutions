@@ -20,13 +20,15 @@ class Solution:
         
         # 3. solution 3: minheap-maintain k largest elements
         import heapq
-        min_heap = [-float('inf')]*k
-        heapq.heapify(min_heap)
-        for num in nums:
-            if num > min_heap[0]:
-                heapq.heappop(min_heap)
-                heapq.heappush(min_heap, num)
-        return min_heap[0]
+        array = nums[:k]
+        heapq.heapify(array)
+        
+        for i in range(k, len(nums)):
+            if nums[i] > array[0]:
+                heapq.heappop(array)
+                heapq.heappush(array, nums[i])
+        
+        return array[0]
 
        
 
