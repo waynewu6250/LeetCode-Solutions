@@ -45,5 +45,33 @@ class Solution:
             
         
         return answer
+
+
+        ################################################################
+        # queue method
+        if not root:
+            return []
+        
+        from collections import deque
+        queue = deque([root])
+        answer = []
+        items = []
+        rounds = 0
+        
+        while queue:
+            
+            items = []
+            for _ in range(len(queue)):
+                node = queue.popleft()
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+                items.append(node.val)
+            
+            answer.append(items if rounds % 2 ==0 else items[::-1])
+            rounds+=1
+        
+        return answer
         
 

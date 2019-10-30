@@ -11,6 +11,7 @@ class Solution(object):
         :type val: int
         :rtype: ListNode
         """
+        # Use dummy node
         if head == None:
             return None
         
@@ -28,3 +29,15 @@ class Solution(object):
             cur = cur.next
         
         return dummy.next
+
+        # Not using dummy node
+        if not head:
+            return head
+        
+        ptr = head
+        while ptr.next:
+            if ptr.next.val == val:
+                ptr.next = ptr.next.next
+            else:
+                ptr = ptr.next
+        return head.next if head.val == val else head
