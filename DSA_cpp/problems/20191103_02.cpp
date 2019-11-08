@@ -111,6 +111,19 @@ bool cmp(edge a, edge b)
        
 }
 
+int findFather(vector<int> father, int x)
+{
+       int a = x;
+       while (x != father[x])
+              x = father[x];
+       while (a != father[a]) {
+              int z = a;
+              a = father[a];
+              father[z] = x;
+       }
+       return x;
+}
+
 
 int main()
 {
@@ -123,8 +136,11 @@ int main()
        int node2 = 0; // node j
        int cost = 0;
        vector<edge> E;
-       vector<int> visited(n+1, 0);
+       vector<int> father(n); 
+       for (int i = 0; i < n; i++)              
+              father[i] = i;
        vector<edge> edges;
+       vector<int> visited(n, 0);
 
        for(int i=0; i<m; i++){
               cin >> node1 >> node2 >> cost;
@@ -135,20 +151,25 @@ int main()
        sort(E.begin(), E.end(), cmp);
        int weight = 0;
        for (int i = 0; i < m; i++){
-              if((!visited[E[i].start] || !visited[E[i].end]) && (visited[E[i].start] <= t) && (visited[E[i].end] <= t)){
+              int ind1 = E[i].start-1;
+              int ind2 = E[i].end-1;
+              int faU = findFather(father, E[i].start);           
+              int faV = findFather(father, E[i].end);           
+
+              if (visited[ind1] >= t || visited[ind2] >= t) continue;
+              if (faU != faV) {                              
+                     father[faU] = faV;
                      weight += E[i].cost;
                      edges.push_back(E[i]);
-                     visited[E[i].start]++;
-                     visited[E[i].end]++;
+                     visited[ind1]++;
+                     visited[ind2]++;
               }
        }
+
        cout << weight << endl;
        for(int i = 0; i < edges.size()-1; i++)
               cout << edges[i].start << "," << edges[i].end << ";";
        cout << edges[edges.size()-1].start << "," << edges[edges.size()-1].end << endl;
-       for(auto i : visited){
-              cout << i << ",";
-       }
 
        return 0;
 }
