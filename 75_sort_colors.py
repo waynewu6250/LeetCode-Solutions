@@ -1,4 +1,5 @@
 class Solution(object):
+    # Method 1
     def sortColors(self, nums):
         """
         :type nums: List[int]
@@ -13,13 +14,25 @@ class Solution(object):
             for _ in range(v):
                 nums[index] = k
                 index += 1
+    
+    # Method 2
+    def sortColors(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: None Do not return anything, modify nums in-place instead.
+        """
+        index = self.sort(nums, 0, 0)
+        self.sort(nums, 1, index)
         
-        # O(1) space
-        for i in range(len(nums)):
-            k = 0
-            while k < i:
-                if nums[i] < nums[k]:
-                    tmp = nums[i]
-                    nums[i] = nums[k]
-                    nums[k] = tmp
-                k += 1
+    def sort(self, nums, flag, index):
+        start, end = index, len(nums) - 1
+        while start <= end:
+            while start <= end and nums[start] == flag:
+                start += 1
+            while start <= end and nums[end] != flag:
+                end -= 1
+            if start <= end:
+                nums[start], nums[end] = nums[end], nums[start]
+                start += 1
+                end -= 1
+        return start

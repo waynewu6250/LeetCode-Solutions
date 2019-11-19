@@ -6,36 +6,30 @@
 class Solution:
     def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
         
-        if endWord not in wordList or not beginWord or not endWord or not wordList:
+        if not wordList or endWord not in wordList or not beginWord or not endWord:
             return 0
         
-        n = len(beginWord)
-        
-        # 1. put in dictionary: wordpattern (a*c) : abc
-        cache = {}
+        cache = collections.defaultdict(list)
         for word in wordList:
-            for i in range(n):
+            for i in range(len(word)):
                 key = word[:i]+"*"+word[i+1:]
-                cache[key] = cache.get(key,[]) + [word]
+                cache[key].append(word)
         
-        print(cache)
+        queue = collections.deque([(beginWord, 1)])
+        visited = set([beginWord])
         
-        # 2. set up queue and visited
-        q = collections.deque([(beginWord, 1)])
-        visited = set()
-        
-        # 3. bfs
-        while q:
-            word, level = q.popleft()
+        while queue:
+            
+            word, level = queue.popleft()
+            
             if word == endWord:
                 return level
             
-            if word not in visited:
-                visited.add(word)
-            
-                for i in range(n):
-                    key = word[:i]+"*"+word[i+1:]
-                    if key in cache:
-                        for possible_word in cache[key]:
-                            q.append((possible_word, level+1))
+            for i in range(len(word)):
+                key = word[:i]+"*"+word[i+1:]
+                if key in cache:
+                    for nextword in cache[key]:
+                        if nextword not in visited:
+                            queue.append((nextword, level+1))
+                            visited.add(nextword)
         return 0
