@@ -5,53 +5,57 @@
 #
 
 # @lc code=start
+import collections
 class Solution:
     def findLadders(self, beginWord: str, endWord: str, wordList: List[str]) -> List[List[str]]:
         
+        cache = collections.defaultdict(list)
         wordList.append(beginWord)
+        for word in wordList:
+            for i in range(len(word)):
+                key = word[:i]+"*"+word[i+1:]
+                cache[key].append(word)
         
-        distances = self.bfs(endWord, wordList)
+        distances = self.bfs(endWord, wordList, cache)
         
         answer = []
         items = [beginWord]
-        self.dfs(beginWord, endWord, wordList, distances, answer, items)
+        self.dfs(beginWord, endWord, wordList, distances, answer, items, cache)
         return answer
     
     
-    def nextwords(self, word, wordList):
-        words = []
-        for i in range(len(word)):
-            for c in "abcdefghijklmnopqrstuvwxyz":
-                next_word = word[:i]+c+word[i+1:]
-                if next_word != word and next_word in wordList:
-                    words.append(next_word)
-        return words
-    
-    def bfs(self, startWord, wordList):
+    def bfs(self, startWord, wordList, cache):
         
         distances = {startWord: 0}
         queue = collections.deque([startWord])
         
         while queue:
             word = queue.popleft()
-            for nextword in self.nextwords(word, wordList):
-                if nextword not in distances:
-                    distances[nextword] = distances[word]+1
-                    queue.append(nextword)
+            for i in range(len(word)):
+                key = word[:i]+"*"+word[i+1:]
+                if key in cache:
+                    for nextword in cache[key]:
+                        if nextword not in distances:
+                            distances[nextword] = distances[word]+1
+                            queue.append(nextword)
         return distances
     
-    def dfs(self, beginWord, endWord, wordList, distances, answer, items):
+    def dfs(self, beginWord, endWord, wordList, distances, answer, items, cache):
         
         if beginWord == endWord:
             answer.append(list(items))
             return
         
-        for nextword in self.nextwords(beginWord, wordList):
-            if distances[nextword] != distances[beginWord]-1:
-                continue
-            items.append(nextword)
-            self.dfs(nextword, endWord, wordList, distances, answer, items)
-            items.pop()
+        for i in range(len(beginWord)):
+            key = beginWord[:i]+"*"+beginWord[i+1:]
+            if key in cache:
+                for nextword in cache[key]:
+                    if nextword in distances and beginWord in distances:
+                        if distances[nextword] != distances[beginWord]-1:
+                            continue
+                        items.append(nextword)
+                        self.dfs(nextword, endWord, wordList, distances, answer, items, cache)
+                        items.pop()
         
 # @lc code=end
 
