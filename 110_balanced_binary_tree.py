@@ -20,21 +20,28 @@ class Solution1:
             return False
         else: return self.isBalanced(root.left) and self.isBalanced(root.right)
 
+##################################################################################
+
 class Solution2:
+    def isBalanced(self, root: TreeNode) -> bool:
+
+        return self.check_height(root) != -1
+    
     def check_height(self, root):
-        if root == None:
-            return True
         
+        if not root:
+            return 0
+        
+        # if false return directly, no need to compare
         left_height = self.check_height(root.left)
-        if left_height == -float('inf'): return -float('inf')
         right_height = self.check_height(root.right)
-        if right_height == -float('inf'): return -float('inf')
         
+        if left_height == -1 or right_height == -1:
+            return -1
+        
+        # if not, compare
         diff = abs(left_height-right_height)
         if diff > 1:
-            return -float('inf')
+            return -1
         else:
             return max(left_height, right_height)+1
-		
-    def isBalanced(self, root: TreeNode) -> bool:
-        return self.check_height(root) != -float('inf')

@@ -4,6 +4,8 @@
 # [120] Triangle
 #
 class Solution:
+
+    
     
     def minimumTotal3(self, triangle):
         if not triangle:
@@ -22,5 +24,7 @@ class Solution:
             for j in range(len(triangle[i])):
                 res[j] = min(res[j], res[j+1]) + triangle[i][j]
         return res[0]
+
+    
         
 

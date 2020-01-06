@@ -7,17 +7,18 @@ class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
         
         # front-back
-        # nums = sorted(nums)
-        # left = 0
-        # right = len(nums)-1
+        # dic = [(num, i) for i, num in enumerate(nums)]
+        # dic = sorted(dic, key = lambda x: x[0])
         
+        # left = 0 
+        # right = len(dic)-1
         # while left < right:
-        #     if nums[left]+nums[right] > target:
+        #     if dic[left][0]+dic[right][0] > target:
         #         right-=1
-        #     elif nums[left]+nums[right] < target:
+        #     elif dic[left][0]+dic[right][0] < target:
         #         left+=1
         #     else:
-        #         return [left, right]
+        #         return [dic[left][1], dic[right][1]]
 
 
         # minus
