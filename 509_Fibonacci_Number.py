@@ -1,4 +1,6 @@
 class Solution:
+
+    # Recursion
     def memo(func):
         cache = {}
         def wraps(*args):
@@ -19,3 +21,16 @@ class Solution:
         if N == 0:
             return a
         else: return fib(N-1, b, a+b)
+
+    
+    # Iteration
+    a, b = 0, 1
+    
+    if N == 0:
+        return a
+    
+    for _ in range(N-2):
+        prev = a
+        a = b
+        b = prev + b
+    return b
