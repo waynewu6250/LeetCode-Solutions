@@ -15,25 +15,23 @@
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
         
-        def recur(root):
-            
-            if not root:
-                return None
-            if root == p or root == q:
-                return root
-            
-            left = recur(root.left)
-            right = recur(root.right)
-            
-            if left and right:
-                return root
-            if left:
-                return left
-            if right:
-                return right
+        if not root:
             return None
         
-        return recur(root)
+        if root == p or root == q:
+            return root
+        
+        left = self.lowestCommonAncestor(root.left, p, q)
+        right = self.lowestCommonAncestor(root.right, p, q)
+        
+        if left and right:
+            return root
+        if left:
+            return left
+        if right:
+            return right
+        
+        return None
         
 # @lc code=end
 

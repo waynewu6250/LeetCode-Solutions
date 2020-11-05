@@ -17,20 +17,20 @@ class Solution:
         
         answer = []
         items = []
-        
-        def recur(root, target, items):
-            
-            if not root:
-                return False
-            
-            if not root.left and not root.right and target == root.val:
-                answer.append(items + [root.val])
-            
-            recur(root.left, target-root.val, items+[root.val])
-            recur(root.right, target-root.val, items+[root.val])
-        
-        recur(root, sum, items)
+        self.dfs(root, answer, items, sum)
         return answer
+    
+    def dfs(self, root, answer, items, sum):
+        
+        if not root:
+            return
+        
+        if not root.left and not root.right and sum == root.val:
+            answer.append(items+[root.val])
+            return
+        
+        self.dfs(root.left, answer, items+[root.val], sum-root.val)
+        self.dfs(root.right, answer, items+[root.val], sum-root.val)
         
 # @lc code=end
 
